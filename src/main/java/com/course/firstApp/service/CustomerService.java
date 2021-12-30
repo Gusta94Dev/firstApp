@@ -22,8 +22,19 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public Customer findById(Integer id){
+    public Customer findById(Integer id) {
         Optional<Customer> customer = customerRepository.findById(id);
         return customer.orElse(null);
+    }
+
+    public Customer update(Customer customer, Integer id) {
+        Optional<Customer> foundCustomer = customerRepository.findById(id);
+        if (foundCustomer.isPresent()) {
+            customerRepository.save(customer);
+        } else {
+            return null;
+        }
+
+        return customer;
     }
 }

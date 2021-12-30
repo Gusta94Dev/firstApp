@@ -29,4 +29,10 @@ public class CustomerController {
     public ResponseEntity<Customer> findById(@PathVariable("id") Integer id){
         return ResponseEntity.ok(customerService.findById(id));
     }
+
+    @PutMapping("/customers/{id}")
+    public ResponseEntity<Customer> update (@PathVariable ("id") Integer id, @RequestBody Customer customer){
+        Customer result = customerService.update(customer, id);
+        return ResponseEntity.ok(result);
+    }
 }
