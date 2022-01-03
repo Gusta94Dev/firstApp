@@ -1,6 +1,7 @@
 package com.course.firstApp.controller;
 
 
+import com.course.firstApp.domain.orm.Product;
 import com.course.firstApp.domain.orm.Repair;
 import com.course.firstApp.service.RepairService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,11 @@ public class RepairController {
     public ResponseEntity<Repair> findById(@PathVariable("id") Integer id){
         Repair repair = repairService.findById(id);
         return ResponseEntity.ok(repair);
+    }
+
+    @PutMapping("/repairs/{id}")
+    public ResponseEntity<Repair> update (@PathVariable ("id") Integer id, @RequestBody Repair repair){
+        Repair result = repairService.update(repair, id);
+        return ResponseEntity.ok(result);
     }
 }

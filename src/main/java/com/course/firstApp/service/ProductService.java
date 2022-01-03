@@ -1,5 +1,6 @@
 package com.course.firstApp.service;
 
+import com.course.firstApp.domain.orm.Customer;
 import com.course.firstApp.domain.orm.Product;
 import com.course.firstApp.domain.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,15 @@ public class ProductService {
     public Product findById(Integer id){
         Optional<Product> product = productRepository.findById(id);
         return product.orElse(null);
+    }
+    public Product update(Product product, Integer id) {
+        Optional<Product> foundProduct = productRepository.findById(id);
+        if (foundProduct.isPresent()) {
+            productRepository.save(product);
+        } else {
+            return null;
+        }
+
+        return product;
     }
 }
